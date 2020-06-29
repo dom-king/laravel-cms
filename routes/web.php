@@ -35,5 +35,38 @@ use Illuminate\Support\Facades\Route;
 // }));
 
 // Route::resource('posts', 'PostsController');
-Route::get('/contact', 'PostsController@contact');
-Route::get('/post/{id}/{name}', 'PostsController@show_post');
+// Route::get('/contact', 'PostsController@contact');
+// Route::get('/post/{id}/{name}', 'PostsController@show_post');
+
+
+/**
+ *  
+ * Fundamental DB Raw SQL Queries
+ * use ? for values with PDO
+ */
+
+use Illuminate\Support\Facades\DB;
+
+Route::get('/insert', function() {
+    
+    DB::insert('insert into posts (title, content) values(?, ?)', ['PHP with Laravel', 'Laravel is great!']);
+
+});
+
+Route::get('/read', function(){
+    $results = DB::select('select * from posts where id = ?', [1]);
+    
+    foreach($results as $result){
+        return $result->title;
+    }
+});
+
+Route::get('/update', function(){
+    $updated = DB::update('update posts set title = "Updated title" where id = ?', [1]);
+    return $updated;
+});
+
+Route::get('/delete', function(){
+    $deleted = DB::delete('delete from posts where id = ?', [1]);
+    return $deleted;
+});
