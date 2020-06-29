@@ -85,7 +85,7 @@ class PostsController extends Controller
     /**
      * Custom view for contact page
      */
-    public function contact() 
+    public function contact()
     {
         $people = ['Dom', 'Alex', 'Chip', 'Todd'];
 
@@ -96,7 +96,7 @@ class PostsController extends Controller
      * Custom view for showing posts
      * @param  int  $id
      */
-    public function show_post($id, $name) 
+    public function show_post($id, $name)
     {
         //return view('post')->with('id', $id);
         return view('post', compact('id', 'name'));
